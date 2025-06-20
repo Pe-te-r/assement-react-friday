@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { jobs as allJobs } from "./data";
 import Job from "./components/JobList";
+import close_icon from './images/icon-remove.svg'
 
 function App() {
   const [filters, setFilters] = useState<string[]>([]);
@@ -37,16 +38,21 @@ function App() {
                 <span className="px-3 py-1">{filter}</span>
                 <button
                   onClick={() => handleRemoveTag(filter)}
-                  className="bg-teal-600 text-white px-2 hover:bg-gray-800"
+                  className="bg-teal-600 cursor-pointer hover:bg-gray-800 p-2 flex items-center justify-center"
                 >
-                  ×
+                  <img
+                    src={close_icon}
+                    alt="Remove"
+                    className="w-3 h-3"
+                  />
                 </button>
+
               </div>
             ))}
           </div>
           <button
             onClick={handleClear}
-            className="ml-auto text-sm text-teal-600 hover:underline"
+            className="ml-auto text-sm cursor-pointer text-teal-600 hover:underline"
           >
             Clear
           </button>
