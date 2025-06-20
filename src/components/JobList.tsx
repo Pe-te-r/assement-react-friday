@@ -1,5 +1,3 @@
-import React from "react";
-
 type JobProps = {
   company: string;
   logo: string;
@@ -13,6 +11,7 @@ type JobProps = {
   location: string;
   languages: string[];
   tools: string[];
+  onTagClick?: (tag: string) => void; // <- NEW
 };
 
 const Job: React.FC<JobProps> = ({
@@ -27,17 +26,16 @@ const Job: React.FC<JobProps> = ({
   contract,
   location,
   languages,
-  tools
+  tools,
+  onTagClick
 }) => {
   const tags = [role, level, ...languages, ...tools];
-  console.log(logo)
 
   return (
     <div
       className={`bg-white shadow-md p-6 rounded-md border-l-4 ${featured ? "border-teal-600" : "border-transparent"
         } flex flex-col md:flex-row items-start md:items-center justify-between gap-4`}
     >
-      {/* Left Side */}
       <div className="flex items-center gap-6">
         <img
           src={logo}
@@ -71,11 +69,11 @@ const Job: React.FC<JobProps> = ({
         </div>
       </div>
 
-      {/* Tags */}
       <div className="flex flex-wrap gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-gray-200 md:border-0 md:ml-auto">
         {tags.map((tag) => (
           <span
             key={tag}
+            onClick={() => onTagClick?.(tag)} // Call parent handler
             className="bg-teal-100 text-teal-600 font-semibold px-3 py-1 rounded cursor-pointer text-sm hover:bg-teal-600 hover:text-white"
           >
             {tag}
